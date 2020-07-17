@@ -5,7 +5,6 @@ Make sure you have Python 3.7
 ```sh
 $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
 $ cd tnea_2019_cut_off_marks
-
 $ pip install -r requirements.txt
 ```
 ## Running app 
