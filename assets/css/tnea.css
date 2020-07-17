@@ -1,0 +1,40 @@
+.dash-spreadsheet-container .dash-spreadsheet-inner table {
+	    margin-left: auto;
+    	margin-right: auto;
+}
+
+a {
+	padding: 20px;
+    display: inline-flex;
+}
+
+#dropdown {
+	padding: 4px;
+}
+
+#dropdown2 {
+	padding: 4px;
+}
+
+#dropdown3 {
+	padding: 4px;
+}
+#dropdown4 {
+	padding: 4px;
+}
+#dropdown5 {
+	padding: 4px;
+}
+
+
+#table-container {
+	text-align: -webkit-center;
+}
+.dash-spreadsheet-container {
+	/*padding: 10px;
+    width: max-content !important;*/
+    overflow-x: auto !important;
+	}
+.next-page{
+	    margin-left: 1%;
+}
