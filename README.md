@@ -14,4 +14,4 @@ $ pip install -r requirements.txt
 
 - Open tnea_app.ipynb in jupyter notebook and run
 
-- App will be running in port 9007 : http:∕∕localhost:9007
+- App will be running in port 9007 : http://127.0.0.1:9007/
