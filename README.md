@@ -3,17 +3,17 @@
 ## Running app locally
 
    ## 1) Install python requirements (Make sure you have Python 3.6 and above)
-
-        ```sh
-        $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
-        $ cd tnea_2019_cut_off_marks
-        $ pip install -r requirements.txt
-        ```
+   
+   ```sh
+   $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
+   $ cd tnea_2019_cut_off_marks
+   $ pip install -r requirements.txt
+   ```
    ## Start jupyter notebook
 
-      - Open **"tnea_app.ipynb"** in jupyter notebook and run
+   Open **"tnea_app.ipynb"** in jupyter notebook and run
 
-      - **App will be running in port 9007 :** http://127.0.0.1:9007/
+   **App will be running in port 9007 :** http://127.0.0.1:9007/
 
 
 ## Dockerisation
