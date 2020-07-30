@@ -22,5 +22,5 @@ $ pip install -r requirements.txt
 $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
 $ cd tnea_2019_cut_off_marks
 $ docker build --tag tnea-app .
-$ docker run --name tnea-app -p 9007:9007 tnea-app
+$ docker run -d --name tnea-app -p 9007:9007 tnea-app
 ```
