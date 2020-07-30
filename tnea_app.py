@@ -597,7 +597,7 @@ def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_va
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False,threaded=True,port=9007)
+    app.run_server(debug=False,threaded=True,port=9007,host='0.0.0.0')
 
 
 # In[ ]:
