@@ -10,7 +10,7 @@ $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.gi
 $ cd tnea_2019_cut_off_marks
 $ pip install -r requirements.txt
 ```
-## Running app 
+## Running app locally
 
 - Open **"tnea_app.ipynb"** in jupyter notebook and run
 
