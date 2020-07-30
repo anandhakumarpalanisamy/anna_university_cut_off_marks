@@ -2,14 +2,14 @@
 
 ## Running app locally
 
-   ## 1) Install python requirements (Make sure you have Python 3.6 and above)
+   ### 1) Install python requirements (Make sure you have Python 3.6 and above)
    
    ```sh
    $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
    $ cd tnea_2019_cut_off_marks
    $ pip install -r requirements.txt
    ```
-   ## Start jupyter notebook
+   ### Start jupyter notebook
 
    Open **"tnea_app.ipynb"** in jupyter notebook and run
 
