@@ -16,11 +16,24 @@ $ pip install -r requirements.txt
 
 - **App will be running in port 9007 :** http://127.0.0.1:9007/
 
-## Run as a docker container
+## Dockerisation
+
+### Build Docker Image
 
 ```sh
 $ git clone https://github.com/anandhakumarpalanisamy/tnea_2019_cut_off_marks.git
 $ cd tnea_2019_cut_off_marks
 $ docker build --tag tnea-app .
+```
+
+### Run as a docker container
+
+```sh
 $ docker run -d --name tnea-app -p 9007:9007 tnea-app
+```
+
+## Run as a docker service with replicas
+
+```sh
+$ docker service create --name tnea-service --replicas 3 -p 9007:9007 tnea-app:latest
 ```
