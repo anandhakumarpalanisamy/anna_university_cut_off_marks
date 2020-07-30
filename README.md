@@ -46,7 +46,7 @@ $ docker build --tag tnea-app .
 $ docker run -d --name tnea-app -p 9007:9007 tnea-app
 ```
 
-## 2b) Run as a docker service with replicas
+### 2b) Run as a docker service with replicas
 
 ```sh
 $ docker service create --name tnea-service --replicas 3 -p 9007:9007 tnea-app:latest
