@@ -25,7 +25,8 @@ from dash.dependencies import Input, Output, State
 
 
 # Joined data of allotted list of all 4 rounds of anna university counselling, branch info and college info
-tnea_csv_file = "assets/csv/joined_table.csv"
+tnea_csv_file_19 = "assets/csv/joined_table_2019.csv"
+tnea_csv_file_20 = "assets/csv/joined_table_2020.csv"
 
 
 # # Read csv to a pandas dataframe and format it
@@ -33,9 +34,25 @@ tnea_csv_file = "assets/csv/joined_table.csv"
 # In[ ]:
 
 
-alloted_list_df = pd.read_csv(tnea_csv_file)
-alloted_list_df.drop('S.NO', axis=1, inplace=True)
-alloted_list_df["COLLEGE CODE"] = pd.to_numeric(alloted_list_df["COLLEGE CODE"])
+alloted_list_df_20 = pd.read_csv(tnea_csv_file_20)
+alloted_list_df_20.drop('S.NO', axis=1, inplace=True)
+alloted_list_df_20["COLLEGE CODE"] = pd.to_numeric(alloted_list_df_20["COLLEGE CODE"])
+
+
+# In[ ]:
+
+
+alloted_list_df_19 = pd.read_csv(tnea_csv_file_19)
+alloted_list_df_19.drop('S.NO', axis=1, inplace=True)
+alloted_list_df_19["COLLEGE CODE"] = pd.to_numeric(alloted_list_df_19["COLLEGE CODE"])
+alloted_list_df_19["OVER ALL RANK"] = pd.to_numeric(alloted_list_df_19["OVER ALL RANK"], errors='coerce')
+alloted_list_df_19.fillna(method='ffill', inplace = True)
+
+
+# In[ ]:
+
+
+alloted_list_df = alloted_list_df_20
 
 
 # # Generates plotly Data table which shows the cut off details
@@ -43,7 +60,7 @@ alloted_list_df["COLLEGE CODE"] = pd.to_numeric(alloted_list_df["COLLEGE CODE"])
 # In[ ]:
 
 
-def generate_plotly_data_table(df,radio_button_value):
+def generate_plotly_data_table(df,radio_button_value,radio_button_year_value):
     '''
     table = dbc.Table.from_dataframe(df, 
                                      striped=True, 
@@ -59,9 +76,9 @@ def generate_plotly_data_table(df,radio_button_value):
     
     
     if radio_button_value == "Cut Off Marks":
-        heading_string = "TNEA 2019 CUT OFF MARKS"
+        heading_string = "TNEA "+str(radio_button_year_value)+" CUT OFF MARKS"
     else:
-        heading_string = 'Total Students = '+ str(df.shape[0])
+        heading_string = "TNEA "+str(radio_button_year_value)+' - Total Students = '+ str(df.shape[0])
     return html.Div(children=[
                         #html.H4(children='Student Count = '+str(df.shape[0]),style={
                                                     #'text-align': 'center',
@@ -123,11 +140,11 @@ app_meta_tags =[
                     # search engines when displaying search results.
                     {
                         'name': 'description',
-                        'content': 'tnea 2019 cut off , anna university 2019 cut off , tamil nadu engineering admissions 2019 cut offs, tnea 2019 cut off marks, anna university counselling cut off marks, tnea 2020 cut off marks, tnea previous year cut off marks, anna university previous year cut off'
+                        'content': 'tnea 2020 cut off , anna university 2020 cut off , tamil nadu engineering admissions 2020 cut offs, tnea 2020 cut off marks, anna university counselling cut off marks, tnea 2020 cut off marks, tnea previous year cut off marks, anna university previous year cut off'
                     },
                     {
                         'name': 'keywords',
-                        'content': 'tnea 2019 cut off,anna university 2019 cut off, anna university cut off , 2019 cut off for anna university, anna university 2019 cut off, tnea 2019 cut off, tnea 2019 cut off marks,tnea 2019 cut off , anna university 2019 cut off , tamil nadu engineering admissions 2019 cut offs, tnea 2019 cut off marks, anna university counselling cut off marks, tnea 2020 cut off marks, tnea previous year cut off marks, anna university previous year cut off'
+                        'content': 'tnea 2020 cut off,anna university 2020 cut off, anna university cut off , 2020 cut off for anna university, anna university 2020 cut off, tnea 2020 cut off, tnea 2020 cut off marks,tnea 2020 cut off , anna university 2020 cut off , tamil nadu engineering admissions 2020 cut offs, tnea 2020 cut off marks, anna university counselling cut off marks, tnea 2020 cut off marks, tnea previous year cut off marks, anna university previous year cut off'
                     },
                     {
                         'name': 'google-site-verification',
@@ -171,7 +188,7 @@ external_stylesheets = [
 
 
 app = dash.Dash(__name__,meta_tags=app_meta_tags,external_stylesheets=external_stylesheets)
-app.title='Tnea 2019 cut off marks - Anna University 2019 cut off marks'
+app.title='Tnea 2020 cut off marks - Anna University 2020 cut off marks'
 server = app.server
 
 
@@ -182,7 +199,7 @@ server = app.server
 
 app.layout = dcc.Loading(
     children=[html.Div(children=[
-                                html.H1(children='TNEA 2019 Cut Off Marks',style={
+                                html.H1(children='TNEA 2020 Cut Off Marks',style={
                                                     'text-align': 'center',
                                                     'background-color': '#5274a0',
                                                     'color' : 'white',
@@ -190,7 +207,7 @@ app.layout = dcc.Loading(
                                                   }),
                                 
                 
-                                #html.H4(children='TNEA 2019 Cut Offs'),
+                                #html.H4(children='TNEA 2020 Cut Offs'),
     
                                 html.P(children='Filter by College Code :',style={'padding':'4px',
                                                                                  'font-weight': 'bold',
@@ -222,7 +239,7 @@ app.layout = dcc.Loading(
                                              options=[
                                                         {'label': i, 'value': i} for i in sorted(alloted_list_df['COLL_NAME'].unique())
                                                     ], 
-                                             value='UNIVERSITY DEPARTMENTS OF ANNA UNIVERSITY, CHENNAI - CEG CAMPUS', 
+                                             value='University Departments of Anna University, Chennai - CEG Campus, Sardar Patel Road, Guindy, Chennai 600 025', 
                                              multi=False, 
                                              placeholder='Filter by College Name...'),
     
@@ -321,59 +338,124 @@ app.layout = dcc.Loading(
                                                 value='Cut Off Marks',
                                                 labelStyle={'display': 'inline-block'}
                                                 ),  
+        
+                                 dcc.RadioItems(id='radio_button_year',
+                                                style={
+                                                    'text-align': 'center',
+                                                    'color' : 'green',
+                                                    'padding':'4px',
+                                                    'font-weight': 'bold',
+                                                    'margin-top':'20px',
+                                                  },
+                                                inputStyle={
+                                                    "margin-right": "5px", 
+                                                    "margin-left": "15px",
+                                                },
+                                                options=[
+                                                        {'label': '2019', 'value': '2019'},
+                                                        {'label': '2020', 'value': '2020'},
+                                                ],
+                                                value='2020',
+                                                labelStyle={'display': 'inline-block'}
+                                                ), 
                               
     
                                 html.Div(id='table-container'),
                                 #html.Div(id='bootstrap-table-container'),
-                                html.H4(children='Downloads'),
+                                html.H4(children='Downloads - 2020'),
                                 html.A(
                                             'Sports Alloted List',
-                                            id='Sports Alloted List',
                                             download="sports_allotted_list.pdf",
-                                            href=app.get_asset_url('./pdf/sports_allotted_list.pdf'),
+                                            href=app.get_asset_url('./pdf/2020/sports_allotted_list.pdf'),
+                                            target="_blank"
+                                        ),
+                                html.A(
+                                            'Ex-Servicemen Allotted List',
+                                            download="ex-servicemen_Allotted_List.pdf",
+                                            href=app.get_asset_url('./pdf/2020/ex-servicemen_Allotted_List.pdf'),
+                                            target="_blank"
+                                        ),
+                                html.A(
+                                            'Differently Abled Allotted List',
+                                            download="differently_abled_allotted_list.pdf",
+                                            href=app.get_asset_url('./pdf/2020/differently_abled_allotted_list.pdf'),
+                                            target="_blank"
+                                        ),
+                                html.A(
+                                            'Allotted List Round 1',
+                                            download="allotted_list_round_1.pdf",
+                                            href=app.get_asset_url('./pdf/2020/allotted_list_round_1.pdf'),
+                                            target="_blank"
+                                        ),
+                                html.A(
+                                            'Allotted List Round 2',
+                                            download="allotted_list_round_2.pdf",
+                                            href=app.get_asset_url('./pdf/2020/allotted_list_round_2.pdf'),
+                                            target="_blank"
+                                        ),
+    
+                                html.A(
+                                            'Allotted List Round 3',
+                                            download="allotted_list_round_3.pdf",
+                                            href=app.get_asset_url('./pdf/2020/allotted_list_round_3.pdf'),
+                                            target="_blank"
+                                      ),
+                                html.A(
+                                            'Allotted List Round 4',
+                                            download="allotted_list_round_4.pdf",
+                                            href=app.get_asset_url('./pdf/2020/allotted_list_round_4.pdf'),
+                                            target="_blank"
+                                        ),
+                                html.A(
+                                            'Vocational Alllotted List',
+                                            download="vocational_allotments.pdf",
+                                            href=app.get_asset_url('./pdf/2020/vocational_allotments.pdf'),
+                                            target="_blank"
+                                        ),
+        
+                                html.H4(children='Downloads - 2019'),
+                                html.A(
+                                            'Sports Alloted List',
+                                            download="sports_allotted_list.pdf",
+                                            href=app.get_asset_url('./pdf/2019/sports_allotted_list.pdf'),
                                             target="_blank"
                                         ),
                                 html.A(
                                             'Ex-Servicemen Allotted List',
                                             id='Ex-Servicemen Allotted List',
                                             download="ex-servicemen_Allotted_List.pdf",
-                                            href=app.get_asset_url('./pdf/ex-servicemen_Allotted_List.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/ex-servicemen_Allotted_List.pdf'),
                                             target="_blank"
                                         ),
                                 html.A(
                                             'Differently Abled Allotted List',
-                                            id='Differently Abled Allotted List',
                                             download="differently_abled_allotted_list.pdf",
-                                            href=app.get_asset_url('./pdf/differently_abled_allotted_list.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/differently_abled_allotted_list.pdf'),
                                             target="_blank"
                                         ),
                                 html.A(
                                             'Allotted List Round 1',
-                                            id='Allotted List Round 1',
                                             download="allotted_list_round_1.pdf",
-                                            href=app.get_asset_url('./pdf/allotted_list_round_1.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/allotted_list_round_1.pdf'),
                                             target="_blank"
                                         ),
                                 html.A(
                                             'Allotted List Round 2',
-                                            id='Allotted List Round 2',
                                             download="allotted_list_round_2.pdf",
-                                            href=app.get_asset_url('./pdf/allotted_list_round_2.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/allotted_list_round_2.pdf'),
                                             target="_blank"
                                         ),
     
                                 html.A(
                                             'Allotted List Round 3',
-                                            id='Allotted List Round 3',
                                             download="allotted_list_round_3.pdf",
-                                            href=app.get_asset_url('./pdf/allotted_list_round_3.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/allotted_list_round_3.pdf'),
                                             target="_blank"
                                       ),
                                 html.A(
                                             'Allotted List Round 4',
-                                            id='Allotted List Round 4',
                                             download="allotted_list_round_4.pdf",
-                                            href=app.get_asset_url('./pdf/allotted_list_round_4.pdf'),
+                                            href=app.get_asset_url('./pdf/2019/allotted_list_round_4.pdf'),
                                             target="_blank"
                                         ),
                             ])], type='cube', fullscreen=True)
@@ -539,10 +621,16 @@ def drop_down4_options(dropdown_value):
              dash.dependencies.Input('dropdown2', 'value'),
              dash.dependencies.Input('dropdown3', 'value'),
              dash.dependencies.Input('radio_button', 'value'),
+             dash.dependencies.Input('radio_button_year', 'value'),
              dash.dependencies.Input('mark_filter', 'value'),
             ])
-def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_value,mark_filter_value):
-    filtered_df = alloted_list_df
+def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_value,radio_button_year_value,mark_filter_value):
+    
+    if radio_button_year_value == "2020":
+        filtered_df = alloted_list_df_20
+    else:
+        filtered_df = alloted_list_df_19
+        
     if mark_filter_value is not None:
         filtered_df = filtered_df.loc[filtered_df['AGGR MARK'] <= mark_filter_value]
     if dropdown_value is not None:
@@ -552,13 +640,14 @@ def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_va
     if dropdown_value3 is not None:
         #filtered_df = filtered_df.loc[filtered_df['BRANCH CODE'] == dropdown_value3]
         if len(dropdown_value3) > 0:
-            filtered_df = filtered_df[filtered_df['BRANCH CODE'].isin(dropdown_value3)]
+            filtered_df = filtered_df.loc[filtered_df['BRANCH CODE'].isin(dropdown_value3)]
         
     if radio_button_value == "Cut Off Marks":
         filtered_df["OVER ALL RANK"] = pd.to_numeric(filtered_df["OVER ALL RANK"], errors='coerce')
         #print(filtered_df.shape,filtered_df['OVER ALL RANK'].isna().sum())
-        filtered_df = filtered_df.loc[filtered_df.groupby(["COLLEGE CODE","ALLOTTED CATEGORY","BRANCH CODE"])["OVER ALL RANK"].idxmax()]
         
+        filtered_df = filtered_df.loc[filtered_df.groupby(["COLLEGE CODE","ALLOTTED CATEGORY","BRANCH CODE"])["OVER ALL RANK"].idxmax()]
+        #filtered_df.reset_index(drop=True, inplace=True)
         #filtered_df["OVER ALL RANK"] = filtered_df['OVER ALL RANK'].astype(int)
         #filtered_df["OVER ALL RANK"] = pd.to_numeric(filtered_df["OVER ALL RANK"], errors='coerce')
         filtered_df = filtered_df.sort_values(by=['OVER ALL RANK'],ascending=True)
@@ -570,25 +659,47 @@ def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_va
         #print(filtered_df)
         if dropdown_value2 == 'OC':
             filtered_df = filtered_df[['COLLEGE CODE','COLL_NAME',
-                                   #'COMMUNITY',
-                                   'ALLOTTED CATEGORY',
+               #'COMMUNITY',
+                                   
                                    'BRANCH CODE', 'BRANCH_NAME',
+                                       'ALLOTTED CATEGORY',
                                    'OVER ALL RANK', 
                                    #'COMMUNITY RANK', 
                                    'AGGR MARK','COUNSELLING ROUND']]
         else:
             filtered_df = filtered_df[['COLLEGE CODE','COLL_NAME',
-                                       #'COMMUNITY',
-                                       'ALLOTTED CATEGORY',
                                        'BRANCH CODE', 'BRANCH_NAME',
+                                       'ALLOTTED CATEGORY',
                                        'OVER ALL RANK', 'COMMUNITY RANK', 
                                        'AGGR MARK','COUNSELLING ROUND']]
         filtered_df.rename({'ALLOTTED CATEGORY': 'COMMUNITY'}, axis=1, inplace=True)
+    else:
+        filtered_df["OVER ALL RANK"] = pd.to_numeric(filtered_df["OVER ALL RANK"], errors='coerce')
+        filtered_df = filtered_df.sort_values(by=['OVER ALL RANK'],ascending=True)
+        if radio_button_year_value == "2020":
+            filtered_df = filtered_df[['APP NO',
+                                       'NAME OF THE CANDIDATE',
+                                       'COLLEGE CODE','COLL_NAME',
+                                       'BRANCH CODE', 'BRANCH_NAME',
+                                       'COMMUNITY','ALLOTTED CATEGORY',
+                                       'OVER ALL RANK', 'COMMUNITY RANK', 
+                                        'AGGR MARK','COUNSELLING ROUND']]
+        else:
+            filtered_df = filtered_df[['APP NO',
+                                       #'NAME OF THE CANDIDATE',
+                                       'COLLEGE CODE','COLL_NAME',
+                                       'BRANCH CODE', 'BRANCH_NAME',
+                                       'COMMUNITY','ALLOTTED CATEGORY',
+                                       'OVER ALL RANK', 'COMMUNITY RANK', 
+                                        'AGGR MARK','COUNSELLING ROUND']]
+        
+        
+        
 
     #print(dropdown_value,dropdown_value2,dropdown_value3,radio_button_value)
     #print(filtered_df.shape,alloted_list_df.shape)
     filtered_df.rename({'AGGR MARK': 'CUT OFF MARK'}, axis=1, inplace=True)
-    return generate_plotly_data_table(filtered_df,radio_button_value)
+    return generate_plotly_data_table(filtered_df,radio_button_value,radio_button_year_value)
 
 
 # # Start the app
@@ -597,7 +708,7 @@ def display_table(dropdown_value,dropdown_value2,dropdown_value3,radio_button_va
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False,threaded=True,port=9007,host='0.0.0.0')
+    app.run_server(debug=False,threaded=True,port=9007)
 
 
 # In[ ]:
