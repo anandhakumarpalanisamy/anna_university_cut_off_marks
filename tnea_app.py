@@ -179,6 +179,7 @@ app_meta_tags =[
 # external CSS stylesheets
 external_stylesheets = [
     "https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css",
+    "/assets/css/tnea.css"
 ]
 
 
