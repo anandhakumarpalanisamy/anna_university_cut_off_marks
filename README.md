@@ -1,5 +1,10 @@
 ## tnea 2019 & 2020 cut off - Anna university 2019 & 2020 cut off - Python Dash App
 
+Anna University cut off marks.This tool is intended to help 2021 students to get an overview of the cut off marks in the 2020  and 2019 anna university counselling . 
+
+**UPDATE :**  THE APP IS UPDATED WITH 2020 CUT OFF MARKS FOR 2021 STUDENTS.
+
+**Tags :** Anna university  2020 cut off | Tnea 2020 cut off   | For 2021 students
 
 
 ## Running app locally
