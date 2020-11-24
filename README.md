@@ -3,8 +3,8 @@
 Anna University cut off marks.This tool is intended to help 2021 students to get an overview of the cut off marks in the 2020  and 2019 anna university counselling . 
 
 **UPDATE :**  THE APP IS UPDATED WITH 2020 CUT OFF MARKS FOR 2021 STUDENTS.
-**APP LINK :**  https://tnea-cut-off.herokuapp.com/
-**SECONDARY APP LINK :** https://tnea-2019-cut-off-marks.herokuapp.com/
+ - **APP LINK :**  https://tnea-cut-off.herokuapp.com/
+ - **SECONDARY APP LINK :** https://tnea-2019-cut-off-marks.herokuapp.com/
 
 **Tags :** Anna university  2020 cut off | Tnea 2020 cut off   | For 2021 students
 
