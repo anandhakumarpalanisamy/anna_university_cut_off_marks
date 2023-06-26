@@ -5,6 +5,5 @@ dash-html-components==1.0.1
 dash-renderer==1.1.2
 dash-table==4.4.1
 numpy==1.18
-werkzeug==2.0.3
 pandas
 gunicorn
